@@ -18,14 +18,35 @@ dependencies {
 }
 
 repositories {
-    mavenCentral()
     mavenLocal()
+    jcenter()
+    mavenCentral()
 }
 
 apply plugin: 'maven'
 
 group='com.bangbits.android.gradle'
 version='1.0.1'
+
+task createPom << {
+    pom {
+        project {
+            groupId 'com.bangbits.android.gradle'
+            artifactId 'buildtype-icon-plugin'
+            version '1.0.1'
+
+            inceptionYear '2015'
+            licenses {
+                license {
+                    name 'The MIT License (MIT)'
+                    url 'https://opensource.org/licenses/MIT'
+                    distribution 'repo'
+                }
+            }
+        }
+    }.writeTo("pom.xml")
+}
+
 /*
 uploadArchives {
     repositories {

@@ -1,14 +1,7 @@
-# TPA Gradle Plugin
+# Buildtype icon plugin - for Android
 
 ## Introduction
-This incubating plugin for Android projects aims at integrating with The Perfect App
-through a proper Gradle plugin, as an alternative to project-dependent scripting using
-Gradle, Groovy, Ant, Java and Bash. The plugin is still under development and you are 
-encouraged to contribute or report bugs.
-
-Initial contribution donated by clb@trifork.com under a
-permissive [MIT license](https://en.wikipedia.org/wiki/MIT_License).
-
+This plugin for Android projects aims at providing a mechanism for generating launcher icons for non-release builds - as an alternative to having to provide these manually.
 
 ## Configuration
 In order to use the plugin, all that's needed is inclusion of the dependency and the Maven

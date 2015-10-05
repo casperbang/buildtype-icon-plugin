@@ -6,6 +6,7 @@ import groovy.io.FileType
 
 /**
 * TODO:
+* - Use a Gausian blur, it would be better looking around the edges
 * - Start rendering largest text placed within lower 3'rd, and check if lower left and right pixel
 *   fall on a transparent pixel - if so, go one size down... continue doing this until it fits.
 *   For the above to work, box should be defined by left/right padding at sample 0.66 and lower padding

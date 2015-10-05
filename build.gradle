@@ -26,14 +26,14 @@ repositories {
 apply plugin: 'maven'
 
 group='com.bangbits.android.gradle'
-version='1.0.1'
+version='1.0.3'
 
 task createPom << {
     pom {
         project {
             groupId 'com.bangbits.android.gradle'
             artifactId 'buildtype-icon-plugin'
-            version '1.0.1'
+            version '1.0.3'
 
             inceptionYear '2015'
             licenses {

@@ -26,26 +26,8 @@ repositories {
 apply plugin: 'maven'
 
 group='com.bangbits.android.gradle'
-version='1.0.3'
+version='1.0.4'
 
-task createPom << {
-    pom {
-        project {
-            groupId 'com.bangbits.android.gradle'
-            artifactId 'buildtype-icon-plugin'
-            version '1.0.3'
-
-            inceptionYear '2015'
-            licenses {
-                license {
-                    name 'The MIT License (MIT)'
-                    url 'https://opensource.org/licenses/MIT'
-                    distribution 'repo'
-                }
-            }
-        }
-    }.writeTo("pom.xml")
-}
 
 /*
 uploadArchives {
@@ -55,3 +37,40 @@ uploadArchives {
         }
     }
 }*/
+
+
+
+// First, apply the publishing plugin
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "com.gradle.publish:plugin-publish-plugin:0.9.1"
+  }
+}
+
+apply plugin: "com.gradle.plugin-publish"
+
+// Unless overridden in the pluginBundle config DSL, the project version will
+// be used as your plugin version when publishing
+//version = "1.0.5"
+//group = "com.bangbits.android.gradle"
+
+// The configuration example below shows the minimum required properties
+// configured to publish your plugin to the plugin portal
+pluginBundle {
+  website = 'http://www.gradle.org/'
+  vcsUrl = 'https://github.com/gradle/gradle'
+  description = 'Greetings from here!'
+  tags = ['android', 'icon']
+
+  plugins {
+    greetingsPlugin {
+      id = 'com.bangbits.android.gradle'
+      displayName = 'Android buildType icon plugin'
+    }
+  }
+}

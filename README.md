@@ -8,4 +8,4 @@ All too often, intermediate build types (test, beta, preview, staging, develop e
 ##Examples
 The examples below are purely for illustrative purposes, please don't sue me because I overlayed text onto your companys logo. ;)
 
-![GitHub Logo](blob/gh-pages/icon-samples/adobe.png)
+![Adobe](../gh-pages/icon-samples/adobe.png)

@@ -4,15 +4,6 @@ import java.awt.image.BufferedImage
 import org.gradle.api.*
 import groovy.io.FileType
 
-/**
-* TODO:
-* - Use a Gausian blur, it would be better looking around the edges
-* - Start rendering largest text placed within lower 3'rd, and check if lower left and right pixel
-*   fall on a transparent pixel - if so, go one size down... continue doing this until it fits.
-*   For the above to work, box should be defined by left/right padding at sample 0.66 and lower padding
-*   defined by sample at 0.5.
-* - Inversion when background brightness is too bright?
-*/
 class BuildtypeIconPlugin implements Plugin<Project> {
     
     @groovy.transform.Memoized
@@ -37,7 +28,6 @@ class BuildtypeIconPlugin implements Plugin<Project> {
             // Possible bug lurking: We don't always have just one manifest and in main?!
             def manifestFile = new File("${project.projectDir}/src/main/AndroidManifest.xml")
             if(manifestFile.exists()){
-                
                 def manifest = new XmlSlurper().parse(manifestFile)
                 def launcher = manifest.application.@'android:icon'
                 def (folderName, fileName) = ((String)launcher).split('/')
@@ -76,18 +66,19 @@ class BuildtypeIconPlugin implements Plugin<Project> {
 
                             // Create variant folder if it doesn't exist
                             def buildTypeName = (productFlavorName.isEmpty() ? buildType.name:capitalize(buildType.name))
-                            def outputFolder = new File("${project.projectDir}/src/${productFlavorName}${buildTypeName}/res/${resDpiFolder.name}/")
-                            if(!outputFolder.exists()){
-                                outputFolder.mkdirs()
+                            def relativeDir = "src/${productFlavorName}${buildTypeName}/res/${resDpiFolder.name}"
+                            def outputDir = new File("${project.projectDir}/${relativeDir}")
+                            if(!outputDir.exists()){
+                                outputDir.mkdirs()
                             }
 
                             // Generate overlayed variant icon
-                            def outputFile = new File(outputFolder, "${fileName}.png")
+                            def outputFile = new File(outputDir, "${fileName}.png")
                             //println "+-Adding ${buildType.name} overlay"
 
                             ImageStamper.generateImage(inputImage, imageStats, buildType.name, outputFile)
 
-                            println "+-Generated $outputFile"
+                            println "+-Generated ${relativeDir}/${fileName}.png"
                         }
                     }
                 }else{

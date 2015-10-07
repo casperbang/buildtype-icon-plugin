@@ -89,4 +89,39 @@ generateBuildtypeIcons - Generates overlayed icons for non-release builds
 
 You will see a bunch of tasks, but under "Other tasks" one of these should be called 'generateBuildtypeIcons'.
 
-Invoking this task, will go through your project (flavorized or not) and generate new icons for these variants based on your master (release) icon. You can then commit these icons and you're done. If you're done with the plugin, you may simply remove it again, although it incurs no significant overhead to your build process.
+Invoking this task, will go through your project (flavorized or not) and generate new icons for these variants based on your master (release) icon:
+
+```
+
+~/$ gradle generateBuildtypeIcons
+app:generateBuildtypeIcons
++-Generated app/src/debug/res/mipmap-hdpi/ic_launcher.png
++-Generated app/src/develop/res/mipmap-hdpi/ic_launcher.png
++-Generated app/src/preview/res/mipmap-hdpi/ic_launcher.png
++-Generated app/src/debug/res/mipmap-mdpi/ic_launcher.png
++-Generated app/src/develop/res/mipmap-mdpi/ic_launcher.png
++-Generated app/src/preview/res/mipmap-mdpi/ic_launcher.png
++-Generated app/src/debug/res/mipmap-xhdpi/ic_launcher.png
++-Generated app/src/develop/res/mipmap-xhdpi/ic_launcher.png
++-Generated app/src/preview/res/mipmap-xhdpi/ic_launcher.png
++-Generated app/src/debug/res/mipmap-xxhdpi/ic_launcher.png
++-Generated app/src/develop/res/mipmap-xxhdpi/ic_launcher.png
++-Generated app/src/preview/res/mipmap-xxhdpi/ic_launcher.png
+
+```
+
+You can then commit these icons and you're done. If you're done with the plugin, you may simply remove it again, although it incurs no significant overhead to your build process and this way you can always update your icons when there is new release icon or a new build type.
+
+##TODO
+- Use a Gausian rather than kernel 3x3 avg blur, it would be better looking around the edges
+- Start rendering largest text placed within lower 3'rd, and check if lower left and right pixel fall on a transparent pixel - if so, go one size down... continue doing this until it fits. For the above to work, box should be defined by left/right padding at sample 0.66 and lower padding defined by sample at 0.5.
+- Inversion when background brightness is too bright?
+
+##License
+Copyright (c) 2015 Casper Bang <<casper@bangbits.com>>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

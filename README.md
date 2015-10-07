@@ -1,14 +1,12 @@
 # Buildtype icon plugin - for Android
-
-## Introduction
 This plugin for Android projects aims at providing a mechanism for generating launcher icons for non-release builds - as an alternative to having to provide these manually. 
 
+## Introduction
 All too often, intermediate build types (test, beta, preview, staging, develop etc.) aren't given a dedicated icon to tell them apart from a production release, either because the developer can't be bothered or because there is no time (read: money) for doing so. The buildtype-icon-plugin will go through all variants and add a dedicated icon, based on the release variant, and do some image processing and add a label.
 
 ##Examples
 The examples below are purely for illustrative purposes, please don't sue me because I overlayed text onto your companys logo. ;)
 
-![Adobe](../gh-pages/icon-samples/adobe.png) 
 ![Amazon](../gh-pages/icon-samples/amazon.png) 
 ![Angry birds](../gh-pages/icon-samples/angrybirds.png) 
 ![Avast](../gh-pages/icon-samples/avastantivirus.png) 
@@ -36,9 +34,59 @@ The examples below are purely for illustrative purposes, please don't sue me bec
 ![Spotify](../gh-pages/icon-samples/spotify.png) 
 ![Tinder](../gh-pages/icon-samples/tinder.png) 
 ![Twitter](../gh-pages/icon-samples/twitter.png) 
-![](../gh-pages/icon-samples/unknown.png) 
 ![Wimp](../gh-pages/icon-samples/wimp.png) 
 ![Word](../gh-pages/icon-samples/word.png) 
 ![Runtastic](../gh-pages/icon-samples/runtastic.png) 
 ![Wordfeud](../gh-pages/icon-samples/wordfeud.png) 
 ![Youtube](../gh-pages/icon-samples/youtube.png) 
+
+##How does it work?
+As should be somewhat apparent on the icon samples above, the plugin does the following:
+- Designates the lower 3'rd of an icon for the label overlay section
+- Applies a blur on this lower 3-rd and makes it 30% darker
+- Tries to determine the transparent padding in the overlay section, to avoid writing onto transparent pixels.
+- Writes the label in the center of the available space with as large a font as possible
+
+The above algorithm isn't bullet proof, in particular there are issues with non-regular icons and icons with transparancy at the center (Opera, I'm looking at you). However, for rectangular and round icons (90-95% of the icons out there?), the result should be quite decent. For a more precise description of what goes on, read the source code. :) Have a better approach, submit a patch. :)
+
+##How can I use it?
+First, make sure you can pull down the binary plugin by adding to your reposatory. For now, this involves adding my Maven reposatory from bintray (I'm working on getting the plugin into de-feacto standard jcenter(), but this takes some time):
+
+```
+buildscript {
+    repositories {
+        ...
+        maven { url "https://dl.bintray.com/casperbang/maven/" }
+    }
+    dependencies {
+        ..
+        classpath 'buildtype-icon-plugin:1.0.4'
+    }
+}
+
+
+```
+
+Now apply the plugin in your build.gradle, so that it gets to install the task it needs:
+
+```
+apply plugin: 'buildtypeIcon'
+
+```
+
+You're ready to go. To see that the plugin is installed and active, invoke the 'gradle task' command:
+
+```
+
+Other tasks
+-----------
+...
+generateBuildtypeIcons - Generates overlayed icons for non-release builds
+...
+
+
+```
+
+You will see a bunch of tasks, but under "Other tasks" one of these should be called 'generateBuildtypeIcons'.
+
+Invoking this task, will go through your project (flavorized or not) and generate new icons for these variants based on your master (release) icon. You can then commit these icons and you're done. If you're done with the plugin, you may simply remove it again, although it incurs no significant overhead to your build process.

@@ -1,10 +1,10 @@
 # Buildtype icon plugin - for Android
-This plugin for Android projects aims at providing a mechanism for generating launcher icons for non-release builds.
+This plugin for Android projects aims at providing a mechanism for generating launcher icons for non-release builds based on a master release icon.
 
 ## Introduction
-All too often, intermediate build types (test, beta, preview, staging, develop etc.) aren't given a dedicated icon to tell them apart from a production release, either because the developer can't be bothered or because there is no time (read: money) for doing so. This makes it hard to identify the different build types on test devices, often leading to launching of the wrong build.
+All too often, intermediate build types (test, beta, preview, staging, develop etc.) are given a very poor launcher icon or even none at all. This likely happens because it's not important enough for the developer to order graphics work or because the developer just can't be bothered. It has some annoying ramifications however, in that it either looks horrible (if one is supplied) or (if none are supplied) it becomes impossible to identify the different build types on test devices.
 
-The buildtype-icon-plugin will go through all variants and add a dedicated icon, based on the release variant, and do some image processing and add a label.
+The buildtype-icon-plugin can come to the rescue here! It will go through all variants (flavors and build types) and generate a dedicated icon based on the master release icon. The generated icon will have the build type name overlayed as a label to the lower 3'rd part of the icon.
 
 ![Amazon](../gh-pages/icon-samples/rejsekortscanner-buildtypes.png)
 

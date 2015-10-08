@@ -2,14 +2,14 @@
 This plugin for Android projects aims at providing a mechanism for generating launcher icons for non-release builds based on a master release icon.
 
 ## Introduction
-All too often, intermediate build types (test, beta, preview, staging, develop etc.) are given a very poor launcher icon or even none at all. This likely happens because it's not important enough for the developer to order graphics work or because the developer just can't be bothered. It has some annoying ramifications however, in that it either looks horrible (if one is supplied) or (if none are supplied) it becomes impossible to identify the different build types on test devices.
+All too often, intermediate build types (test, beta, preview, staging, develop etc.) are given a very poor launcher icon or even none at all. This likely happens because it isn't important enough for the developer to order graphics work or because the developer just can't be bothered. This has some annoying ramifications however, in that it either reflects poorly on the intermediate build (if a crap icon is supplied) or (if none are supplied at all) it becomes impossible to tell different build types apart on test devices.
 
-The buildtype-icon-plugin can come to the rescue here! It will go through all variants (flavors and build types) and generate a dedicated icon based on the master release icon. The generated icon will have the build type name overlayed as a label to the lower 3'rd part of the icon.
+The buildtype-icon-plugin can come to the rescue here! It will go through all variants (flavors and build types) and generate a dedicated icon based on the master release icon. The generated icon will have the build type name overlaid as a label to the lower 3'rd part of the icon.
 
 ![Amazon](../gh-pages/icon-samples/rejsekortscanner-buildtypes.png)
 
 ##Icon examples
-The examples below are purely for illustrative purposes, please don't sue me because I overlayed text onto your companys logo. ;)
+The examples below are purely for illustrative purposes, please don't sue me because I overlaid text onto your companys logo. ;)
 
 ![Amazon](../gh-pages/icon-samples/amazon.png) 
 ![Angry birds](../gh-pages/icon-samples/angrybirds.png) 
@@ -46,15 +46,15 @@ The examples below are purely for illustrative purposes, please don't sue me bec
 
 ##How does it work?
 As should be somewhat apparent on the icon samples above, the plugin does the following:
-- Designates the lower 3'rd of an icon for the label overlay section
-- Applies a blur on this lower 3-rd and makes it 30% darker
-- Tries to determine the transparent padding in the overlay section, to avoid writing onto transparent pixels.
+- Designates the lower 3'rd of an icon for the label overlay region
+- Applies a blur on this lower 3'rd and makes it 30% darker
+- Tries to determine the transparent padding in the overlay section, to avoid writing onto transparent pixels
 - Writes the label in the center of the available space with as large a font as possible
 
-The above algorithm isn't bullet proof, in particular there are issues with non-regular icons and icons with transparancy at the center (Opera, I'm looking at you). However, for rectangular and round icons (90-95% of the icons out there?), the result should be quite decent. For a more precise description of what goes on, read the source code. :) Have a better approach, submit a patch. :)
+The above algorithm isn't bullet proof, in particular there are issues with non-regular icons and icons with transparency at the center (Opera, I'm looking at you). However, for rectangular and round icons (90-95% of the icons out there?), the result should be quite decent. For a more precise description of what goes on, [read the source code](https://github.com/casperbang/buildtype-icon-plugin/blob/master/src/main/java/com/bangbits/android/gradle/ImageStamper.java). :) Have a better approach, submit a patch. :)
 
 ##How can I use it?
-First, make sure you can pull down the binary plugin by adding to your reposatory. For now, this involves adding my Maven reposatory from bintray (I'm working on getting the plugin into de-feacto standard jcenter(), but this takes some time):
+First, make sure you can pull down the binary plugin by adding to your repository. For now, this involves adding my Maven reposatory from bintray (I'm working on getting the plugin into de-feacto standard jcenter(), but this takes some time):
 
 ```
 buildscript {
@@ -85,7 +85,7 @@ You're ready to go. To see that the plugin is installed and active, invoke the '
 Other tasks
 -----------
 ...
-generateBuildtypeIcons - Generates overlayed icons for non-release builds
+generateBuildtypeIcons - Generates overlaid icons for non-release builds
 ...
 
 
@@ -114,7 +114,7 @@ app:generateBuildtypeIcons
 
 ```
 
-You can then commit these icons and you're done. If you're done with the plugin, you may simply remove it again, although it incurs no significant overhead to your build process and this way you can always update your icons when there is new release icon or a new build type.
+You can then commit these icons and you're done. The plugin can then be removed, although it incurs no significant overhead to your build process and this way you can always update your icons when there is new release icon or a new build type.
 
 ##TODO
 - Use a Gausian rather than kernel 3x3 avg blur, it would be better looking around the edges

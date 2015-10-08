@@ -28,18 +28,6 @@ apply plugin: 'maven'
 group='com.bangbits.android.gradle'
 version='1.0.4'
 
-
-/*
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: uri('http://nexus.ci82.trifork.com/content/repositories/releases/'))
-        }
-    }
-}*/
-
-
-
 // First, apply the publishing plugin
 buildscript {
   repositories {

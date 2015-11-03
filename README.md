@@ -54,7 +54,7 @@ As should be somewhat apparent on the icon samples above, the plugin does the fo
 The above algorithm isn't bullet proof, in particular there are issues with non-regular icons and icons with transparency at the center (Opera, I'm looking at you). However, for rectangular and round icons (90-95% of the icons out there?), the result should be quite decent. For a more precise description of what goes on, [read the source code](https://github.com/casperbang/buildtype-icon-plugin/blob/master/src/main/java/com/bangbits/android/gradle/ImageStamper.java). :) Have a better approach, submit a patch. :)
 
 ##How can I use it?
-First, make sure you can pull down the binary plugin by adding to your repository - I got bintray to add the plugin so as long as you have jcenter as a reposatory then you should be able to see the plugin. 
+First, make sure you can pull down the binary plugin by adding to your repository - I got bintray to add the plugin so as long as you have jcenter as a reposatory then you should be able to see the plugin. You should strive to use the latest version, which you can find by [inspecting the bintray reposatory](https://jcenter.bintray.com/com/bangbits/android/gradle/buildtype-icon-plugin/).
 
 ```
 buildscript {
@@ -62,6 +62,9 @@ buildscript {
         classpath 'buildtype-icon-plugin:1.0.4'
     }
 }
+
+
+```
 
 Alternatively, you can also include it by adding my Maven reposatory, but it shouldn't be necessary:
 
